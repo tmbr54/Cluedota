@@ -2,6 +2,7 @@
 
 require('internal/util')
 require('cluedota')
+require('functions')
 
 function Precache( context )
 --[[
@@ -15,6 +16,8 @@ function Precache( context )
   ]]
 
   DebugPrint("[CLUEDOTA] Performing pre-load precache")
+
+
 
   -- Particles can be precached individually or by folder
   -- It it likely that precaching a single particle system will precache all of its children, but this may not be guaranteed

@@ -3,12 +3,20 @@
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by cluedota
 -- You can also change the cvar 'cluedota_spew' at any time to 1 or 0 for output/no output
-CLUEDOTA_DEBUG_SPEW = false 
+CLUEDOTA_DEBUG_SPEW = false
 
 if cluedota == nil then
     DebugPrint( '[CLUEDOTA] creating cluedota game mode' )
     _G.cluedota = class({})
+
+
 end
+
+
+
+
+
+
 
 -- This library allow for easily delayed/timed actions
 require('libraries/timers')
@@ -38,8 +46,8 @@ require('events')
 
   In this function, place all of your PrecacheItemByNameAsync and PrecacheUnitByNameAsync.  These calls will be made
   after all players have loaded in, but before they have selected their heroes. PrecacheItemByNameAsync can also
-  be used to precache dynamically-added datadriven abilities instead of items.  PrecacheUnitByNameAsync will 
-  precache the precache{} block statement of the unit and all precache{} block statements for every Ability# 
+  be used to precache dynamically-added datadriven abilities instead of items.  PrecacheUnitByNameAsync will
+  precache the precache{} block statement of the unit and all precache{} block statements for every Ability#
   defined on the unit.
 
   This function should only be called once.  If you want to/need to precache more items/abilities/units at a later
@@ -49,13 +57,43 @@ require('events')
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function cluedota:PostLoadPrecache()
-  DebugPrint("[CLUEDOTA] Performing Post-Load precache")    
+  DebugPrint("[CLUEDOTA] Performing Post-Load precache")
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
 
   --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
 end
+
+
+--Starts a new round.
+--Resets the board, finds new spawn_positions, stuns all heroes and moves them to new positions, then
+-- restarts the game logic.
+
+--technically works. maybe better once the game has been started to do midgame reinit
+function startRound()
+ print("Starting a new round..")
+
+
+
+  local table_spawn = Entities:FindAllByName("ent_spawn")
+  local table_spawn = shuffleTable(table_spawn)
+
+  for playerID,hero in pairs(table_heroes) do
+    print("playerID", playerID)
+    --set to new position
+    new_position_entity = table_spawn[playerID]
+    new_position = new_position_entity:GetAbsOrigin()
+    hero:SetAbsOrigin(new_position)
+    FindClearSpaceForUnit(hero, new_position, false)
+
+
+  end
+end
+
+
+
+
 
 --[[
   This function is called once and only once as soon as the first player (almost certain to be the server in local lobbies) loads in.
@@ -71,7 +109,37 @@ end
 ]]
 function cluedota:OnAllPlayersLoaded()
   DebugPrint("[CLUEDOTA] All Players have loaded into the game")
+
+  --insert all connected players into table
+  for id = 0, (MAX_NUMBER_OF_TEAMS) do
+    table_players[id] = PlayerResource:GetPlayer(id)
+
+    --if player connects
+    if table_players[id] then
+      local playerID = table_players[id]:GetPlayerID()
+      table_players[id]:MakeRandomHeroSelection()
+      --random a hero
+      PlayerResource:SetHasRepicked(playerID)
+      PlayerResource:SetHasRandomed(playerID)
+    else
+
+      --if player hasn't connected
+      if PlayerResource:GetConnectionState(id) == 1 then
+        table_players[id] = "player_not_connected"
+        print("Player "..id.." hasn't connected")
+      end
+    end
+  end
+
+
+
+  print("All players have connected:")
+  PrintTable(table_players)
+
 end
+
+
+
 
 --[[
   This function is called once and only once for every player when they spawn into the game for the first time.  It is also called
@@ -80,22 +148,24 @@ end
 
   The hero parameter is the hero entity that just spawned in
 ]]
+
 function cluedota:OnHeroInGame(hero)
   DebugPrint("[CLUEDOTA] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  print("hero:GetAbsOrigin", hero:GetAbsOrigin())
+  hero:SetGold(0, false)
+  --add hero to table_heroes
+  local playerID = hero:GetPlayerOwnerID()
+  print("PlayerID of ",hero:GetName()," : ", playerID)
+  table_heroes[playerID] = hero
 
-  -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  hero:SetGold(500, false)
+  --set hero to a 'random' position
+  local new_position = table_spawn[playerID+1]:GetAbsOrigin() --lazy fix because table_spawn starts at 1
+  print("new pos table spawn", new_position)
+  --set to new position
+  hero:SetAbsOrigin(new_position)
+  FindClearSpaceForUnit(hero, new_position, true)
 
-  -- These lines will create an item and add it to the player, effectively ensuring they start with the item
-  local item = CreateItem("item_example_item", hero, hero)
-  hero:AddItem(item)
 
-  --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
-    --with the "example_ability" ability
-
-  local abil = hero:GetAbilityByIndex(1)
-  hero:RemoveAbility(abil:GetAbilityName())
-  hero:AddAbility("example_ability")]]
 end
 
 --[[
@@ -106,11 +176,14 @@ end
 function cluedota:OnGameInProgress()
   DebugPrint("[CLUEDOTA] The game has officially begun")
 
-  Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
+
+
+    Timers:CreateTimer(5, -- Start this timer 30 game-time seconds later
     function()
-      DebugPrint("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
-      return 30.0 -- Rerun this timer every 30 game-time seconds 
-    end)
+        print("Gamelogic has started")
+        --start gamelogic
+        return nil -- Rerun this timer every 30 game-time seconds
+      end)
 end
 
 
@@ -119,7 +192,21 @@ end
 -- It can be used to pre-initialize any values/tables that will be needed later
 function cluedota:Initcluedota()
   cluedota = self
+
+
   DebugPrint('[CLUEDOTA] Starting to load cluedota cluedota...')
+
+  --init Tables
+    table_players = {}
+    table_heroes = {}
+    table_spawn = {}
+    table_already_occupied_spawn = {}
+
+    --create spawn positions
+    table_spawn = Entities:FindAllByName("ent_spawn")
+    table_spawn = shuffleTable(table_spawn)
+    --print("table_spawn")
+    --PrintTable(table_spawn)
 
   -- Call the internal function to set up the rules/behaviors specified in constants.lua
   -- This also sets up event hooks for all event handlers in events.lua
@@ -129,7 +216,13 @@ function cluedota:Initcluedota()
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand( "command_example", Dynamic_Wrap(cluedota, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
+  ListenToGameEvent("player_connect_full", Dynamic_Wrap(cluedota, "OnPlayerLoaded"), self)
+
   DebugPrint('[CLUEDOTA] Done loading cluedota cluedota!\n\n')
+end
+
+function cluedota:OnPlayerLoaded(keys)
+
 end
 
 -- This is an example console command

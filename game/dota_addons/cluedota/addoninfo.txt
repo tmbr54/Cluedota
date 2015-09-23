@@ -1,11 +1,11 @@
 "AddonInfo"
 {
-  "TeamCount" "10"
-  "maps"      "template_map"
+  "TeamCount" "6"
+  "maps"      "cluedota"
   "IsPlayable"  "1"
-  "template_map"
+  "cluedota"
   {
-          "MaxPlayers"                    "10"
+          "MaxPlayers"                    "6"
   }
 //  "desert_duo"
 //  {
