@@ -18,6 +18,28 @@ function Precache( context )
   DebugPrint("[CLUEDOTA] Performing pre-load precache")
 
 
+  --Precache NPCs
+  PrecacheUnitByNameSync("npc_cd_earthshaker", context)
+  PrecacheUnitByNameSync("npc_cd_kunkka", context)
+  PrecacheUnitByNameSync("npc_cd_beastmaster", context)
+  PrecacheUnitByNameSync("npc_cd_omni", context)
+  PrecacheUnitByNameSync("npc_cd_spirit_breaker", context)
+  PrecacheUnitByNameSync("npc_cd_tusk", context)
+  PrecacheUnitByNameSync("npc_cd_legion", context)
+  PrecacheUnitByNameSync("npc_cd_anti_mage", context)
+  PrecacheUnitByNameSync("npc_cd_mirana", context)
+  PrecacheUnitByNameSync("npc_cd_sniper", context)
+  PrecacheUnitByNameSync("npc_cd_ursa", context)
+  PrecacheUnitByNameSync("npc_cd_anti_mage", context)
+  PrecacheUnitByNameSync("npc_cd_naga", context)
+  PrecacheUnitByNameSync("npc_cd_maiden", context)
+  PrecacheUnitByNameSync("npc_cd_windrunner", context)
+  PrecacheUnitByNameSync("npc_cd_lina", context)
+  PrecacheUnitByNameSync("npc_cd_dazzle", context)
+  PrecacheUnitByNameSync("npc_cd_skywrath", context)
+  PrecacheUnitByNameSync("npc_cd_ogremagi", context)
+  PrecacheUnitByNameSync("npc_cd_meepo", context)
+
 
   -- Particles can be precached individually or by folder
   -- It it likely that precaching a single particle system will precache all of its children, but this may not be guaranteed

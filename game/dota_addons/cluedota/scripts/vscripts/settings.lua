@@ -83,7 +83,7 @@ USE_CUSTOM_TEAM_COLORS = true          -- Should we use custom team colors?
 USE_CUSTOM_TEAM_COLORS_FOR_PLAYERS = true          -- Should we use custom team colors to color the players/minimap?
 
 TEAM_COLORS = {}                        -- If USE_CUSTOM_TEAM_COLORS is set, use these colors.
-TEAM_COLORS[DOTA_TEAM_GOODGUYS] = { 196, 79, 99 }     -- Red Rooster
+TEAM_COLORS[DOTA_TEAM_GOODGUYS] = { 255, 130, 0  }     -- Orange Ostrich
 TEAM_COLORS[DOTA_TEAM_BADGUYS]  = { 113, 203, 81 }    -- Green Goose
 TEAM_COLORS[DOTA_TEAM_CUSTOM_1] = { 54, 149, 227 }    -- Blue Bear
 TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 217, 116, 219 }   -- Pink Panther

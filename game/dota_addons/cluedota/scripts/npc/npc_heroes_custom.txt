@@ -5,7 +5,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_alchemist"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -22,20 +22,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -56,12 +46,13 @@
     "VisionDaytimeRange"    "1000"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1000"                  // Range of vision at night time.
   }
+
   "npc_dota_hero_dragon_knight_cluedota"
   {
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_dragon_knight"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -78,20 +69,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -117,7 +98,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_juggernaut"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -134,20 +115,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -173,7 +144,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_night_stalker"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -190,20 +161,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -229,7 +190,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_pudge"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -246,20 +207,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -285,7 +236,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_riki"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -302,20 +253,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -336,12 +277,13 @@
     "VisionDaytimeRange"    "1000"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1000"                  // Range of vision at night time.
   }
+
   "npc_dota_hero_bounty_hunter_cluedota"
   {
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_bounty_hunter"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -358,20 +300,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -392,12 +324,13 @@
     "VisionDaytimeRange"    "1000"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1000"                  // Range of vision at night time.
   }
-  "npc_npc_dota_hero_lycan_cluedota"
+
+  "npc_dota_hero_lycan_cluedota"
   {
     "AbilityLayout"     "6"
-    "override_hero"     "npc_npc_dota_hero_lycan"
+    "override_hero"     "npc_dota_hero_lycan"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -414,20 +347,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -448,12 +371,13 @@
     "VisionDaytimeRange"    "1000"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1000"                  // Range of vision at night time.
   }
+
   "npc_dota_hero_brewmaster_cluedota"
   {
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_brewmaster"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -470,20 +394,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -509,7 +423,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_phantom_assassin"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -526,20 +440,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -565,7 +469,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_rubick"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -582,20 +486,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -621,7 +515,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_templar_assassin"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -638,20 +532,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -677,7 +561,7 @@
     "AbilityLayout"     "6"
     "override_hero"     "npc_dota_hero_keeper_of_the_light"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -694,20 +578,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.
@@ -728,12 +602,12 @@
     "VisionDaytimeRange"    "1000"                  // Range of vision at night time.
     "VisionNighttimeRange"    "1000"                  // Range of vision at night time.
   }
-  "npc_dota_hero_ember_spirit_cluedota"
+  "npc_dota_hero_invoker_cluedota"
   {
     "AbilityLayout"     "6"
-    "override_hero"     "npc_dota_hero_ember_spirit"
+    "override_hero"     "npc_dota_hero_invoker"
     "SoundSet"          "0"
-    "Ability1"        "cluedota_empty1"
+    "Ability1" "no_hp"
     "Ability2"        "cluedota_empty2"
     "Ability3"        "cluedota_empty3"
     "Ability4"        "cluedota_empty4"
@@ -750,20 +624,10 @@
     "Ability15"       ""
     "Ability16"       ""
 
-    "ArmorPhysical"       "0"                 // Physical protection.
-    "MagicalResistance"       "0"                 // Magical protection (percentage).
 
     "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"
-    "AttackDamageMin"     "1"                   // Damage range min.
-    "AttackDamageMax"     "1"                   // Damage range max.
 
     //"AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
-    "AttributeBaseStrength"   "0"                   // Base strength
-    "AttributeStrengthGain"   "0"                   // Strength bonus per level.
-    "AttributeBaseIntelligence" "0"                   // Base intelligence
-    "AttributeIntelligenceGain" "0"                   // Intelligence bonus per level.
-    "AttributeBaseAgility"    "0"                   // Base agility
-    "AttributeAgilityGain"    "0"                   // Agility bonus per level.
 
     "BountyXP"          "0"                 // Experience earn.
     "BountyGoldMin"       "0"                   // Gold earned min.

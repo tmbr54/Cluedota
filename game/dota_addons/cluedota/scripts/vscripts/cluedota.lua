@@ -71,24 +71,70 @@ end
 -- restarts the game logic.
 
 --technically works. maybe better once the game has been started to do midgame reinit
-function startRound()
- print("Starting a new round..")
+function startNewRound()
+  print("Starting a new round..")
+  spawnNewNpcs()
+  --shuffle tables
+  local table_spawn_new = shuffleTable(table_spawn)
+  local table_new_heroes_original_name = shuffleTable(table_all_heroes_original_name)
 
+  -- iterate over all players
+  for num,player in pairs(table_players) do
+    local playerID = player:GetPlayerID()
+    local old_hero = player:GetAssignedHero()
 
+    for i=0,NUM_OF_PLAYERS,1 do
+      print("playerID", playerID,"old hero", old_hero:GetUnitName())
+      print("*************")
+      print("playerID", playerID, "new hero ", table_new_heroes_original_name[1])
+      -- make new hero
+      local hero = nil
+      -- replace their heroes
+      PrecacheUnitByNameAsync(table_new_heroes_original_name[playerID+1], function()
+        print(playerID,table_new_heroes_original_name[playerID+1])
 
-  local table_spawn = Entities:FindAllByName("ent_spawn")
-  local table_spawn = shuffleTable(table_spawn)
-
-  for playerID,hero in pairs(table_heroes) do
-    print("playerID", playerID)
-    --set to new position
-    new_position_entity = table_spawn[playerID]
-    new_position = new_position_entity:GetAbsOrigin()
-    hero:SetAbsOrigin(new_position)
-    FindClearSpaceForUnit(hero, new_position, false)
-
-
+        PlayerResource:ReplaceHeroWith(playerID,table_new_heroes_original_name[playerID+1], 0, 0)
+        -- remove the zombie hero
+        old_hero:RemoveSelf()
+        --get new hero assignment
+        local hero = player:GetAssignedHero()
+        --set to new position
+        new_position = table_spawn_new[playerID+1]:GetAbsOrigin()
+        hero:SetAbsOrigin(new_position)
+        FindClearSpaceForUnit(hero, new_position, false)
+      end, playerID)
+    end
   end
+end
+
+
+function spawnNewNpcs()
+print("*************************************************************************")
+-- cleanup
+  -- find all current npcs (creates a new table)
+  local table_current_npcs = Entities:FindAllByClassname("npc_dota_creature")
+  -- remove them
+  for num,npc in pairs(table_current_npcs) do
+    if npc then
+      npc:RemoveSelf()
+    end
+  end
+--( szUnitName, vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber )
+-- spawn new npcs
+  -- pull random npcs from table_all_npcs
+  local new_npcs = shuffleTable(table_all_npcs)
+  -- find NPC locations
+  local spawn_positions = Entities:FindAllByName("ent_spawn_npc")
+  local spawn_positions = shuffleTable(spawn_positions)
+  --PrintTable(spawn_positions)
+  -- create NPCs
+  for i=1,10,1 do
+    local current_spawn_pos = spawn_positions[i]:GetAbsOrigin()
+    local npc = CreateUnitByName(new_npcs[i], current_spawn_pos, false, nil, nil, -1)
+    print(i, "NPC ",npc:GetUnitName()," has spawned at ",current_spawn_pos,".")
+  end
+print("*************************************************************************")
+
 end
 
 
@@ -134,8 +180,8 @@ function cluedota:OnAllPlayersLoaded()
 
 
   print("All players have connected:")
-  PrintTable(table_players)
-
+  --PrintTable(table_players)
+  NUM_OF_PLAYERS = table.getn(table_players)
 end
 
 
@@ -151,20 +197,32 @@ end
 
 function cluedota:OnHeroInGame(hero)
   DebugPrint("[CLUEDOTA] Hero spawned in game for first time -- " .. hero:GetUnitName())
-  print("hero:GetAbsOrigin", hero:GetAbsOrigin())
-  hero:SetGold(0, false)
-  --add hero to table_heroes
-  local playerID = hero:GetPlayerOwnerID()
-  print("PlayerID of ",hero:GetName()," : ", playerID)
-  table_heroes[playerID] = hero
+  if hero then
+    --print("hero:GetAbsOrigin", hero:GetAbsOrigin())
+    hero:SetGold(0, false)
+    print("test3")
 
-  --set hero to a 'random' position
-  local new_position = table_spawn[playerID+1]:GetAbsOrigin() --lazy fix because table_spawn starts at 1
-  print("new pos table spawn", new_position)
-  --set to new position
-  hero:SetAbsOrigin(new_position)
-  FindClearSpaceForUnit(hero, new_position, true)
 
+    --add hero to table_current_heroes
+    local playerID = hero:GetPlayerOwnerID()
+    print("PlayerID of ",hero:GetName()," : ", playerID)
+    table_current_heroes[playerID] = hero
+
+    --set hero to a 'random' position
+    local new_position = table_spawn[playerID+1]:GetAbsOrigin() --lazy fix because table_spawn starts at 1, yet playerID at 0
+    --print("new pos table spawn", new_position)
+    --set to new position
+    hero:SetAbsOrigin(new_position)
+    FindClearSpaceForUnit(hero, new_position, true)
+
+    --remove hp_bar
+    local no_hp = hero:FindAbilityByName("no_hp")
+    if no_hp then
+      no_hp:SetLevel(1)
+    end
+    --remove skill points
+    hero:SetAbilityPoints(0)
+  end
 
 end
 
@@ -177,12 +235,11 @@ function cluedota:OnGameInProgress()
   DebugPrint("[CLUEDOTA] The game has officially begun")
 
 
-
     Timers:CreateTimer(5, -- Start this timer 30 game-time seconds later
     function()
         print("Gamelogic has started")
         --start gamelogic
-        return nil -- Rerun this timer every 30 game-time seconds
+        spawnNewNpcs()
       end)
 end
 
@@ -198,9 +255,80 @@ function cluedota:Initcluedota()
 
   --init Tables
     table_players = {}
-    table_heroes = {}
+    table_current_heroes = {}
     table_spawn = {}
     table_already_occupied_spawn = {}
+    table_all_heroes = { "npc_dota_hero_alchemist_cluedota",
+    "npc_dota_hero_dragon_knight_cluedota",
+    "npc_dota_hero_juggernaut_cluedota",
+    "npc_dota_hero_night_stalker_cluedota",
+    "npc_dota_hero_pudge_cluedota",
+    "npc_dota_hero_riki_cluedota",
+    "npc_dota_hero_bounty_hunter_cluedota",
+    "npc_dota_hero_lycan_cluedota",
+    "npc_dota_hero_brewmaster_cluedota",
+    "npc_dota_hero_phantom_assassin_cluedota",
+    "npc_dota_hero_rubick_cluedota",
+    "npc_dota_hero_phantom_assassin_cluedota",
+    "npc_dota_hero_templar_assassin_cluedota",
+    "npc_dota_hero_keeper_of_the_light_cluedota",
+    "npc_dota_hero_invoker_cluedota",
+    }
+
+    table_all_heroes_original_nam = { "npc_dota_hero_alchemist_cluedota",
+    "npc_dota_hero_dragon_knight_cluedota",
+    "npc_dota_hero_juggernaut_cluedota",
+    "npc_dota_hero_night_stalker_cluedota",
+    "npc_dota_hero_pudge_cluedota",
+    "npc_dota_hero_riki_cluedota",
+    "npc_dota_hero_bounty_hunter_cluedota",
+    "npc_dota_hero_lycan_cluedota",
+    "npc_dota_hero_brewmaster_cluedota",
+    "npc_dota_hero_phantom_assassin_cluedota",
+    "npc_dota_hero_rubick_cluedota",
+    "npc_dota_hero_phantom_assassin_cluedota",
+    "npc_dota_hero_templar_assassin_cluedota",
+    "npc_dota_hero_keeper_of_the_light_cluedota",
+    "npc_dota_hero_invoker_cluedota",
+    }
+
+    table_all_heroes_original_name = { "npc_dota_hero_alchemist",
+    "npc_dota_hero_dragon_knight",
+    "npc_dota_hero_juggernaut",
+    "npc_dota_hero_night_stalker",
+    "npc_dota_hero_pudge",
+    "npc_dota_hero_riki",
+    "npc_dota_hero_bounty_hunter",
+    "npc_dota_hero_lycan",
+    "npc_dota_hero_brewmaster",
+    "npc_dota_hero_phantom_assassin",
+    "npc_dota_hero_rubick",
+    "npc_dota_hero_phantom_assassin",
+    "npc_dota_hero_templar_assassin",
+    "npc_dota_hero_keeper_of_the_light",
+    "npc_dota_hero_invoker",
+    }
+
+
+    table_all_npcs = { "npc_cd_earthshaker",
+    "npc_cd_kunkka",
+    "npc_cd_beastmaster",
+    "npc_cd_omni",
+    "npc_cd_spirit_breaker",
+    "npc_cd_tusk",
+    "npc_cd_legion",
+    "npc_cd_anti_mage",
+    "npc_cd_mirana",
+    "npc_cd_sniper",
+    "npc_cd_ursa",
+    "npc_cd_maiden",
+    "npc_cd_windrunner",
+    "npc_cd_lina",
+    "npc_cd_dazzle",
+    "npc_cd_ogremagi",
+    "npc_cd_skywrath",
+    "npc_cd_meepo",
+    }
 
     --create spawn positions
     table_spawn = Entities:FindAllByName("ent_spawn")
@@ -214,7 +342,7 @@ function cluedota:Initcluedota()
   cluedota:_Initcluedota()
 
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(cluedota, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+  Convars:RegisterCommand( "debug_command", Dynamic_Wrap(cluedota, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
   ListenToGameEvent("player_connect_full", Dynamic_Wrap(cluedota, "OnPlayerLoaded"), self)
 
@@ -227,15 +355,13 @@ end
 
 -- This is an example console command
 function cluedota:ExampleConsoleCommand()
-  print( '******* Example Console Command ***************' )
   local cmdPlayer = Convars:GetCommandClient()
   if cmdPlayer then
     local playerID = cmdPlayer:GetPlayerID()
     if playerID ~= nil and playerID ~= -1 then
       -- Do something here for the player who called this command
-      PlayerResource:ReplaceHeroWith(playerID, "npc_dota_hero_viper", 1000, 1000)
+      startNewRound()
     end
   end
 
-  print( '*********************************************' )
 end

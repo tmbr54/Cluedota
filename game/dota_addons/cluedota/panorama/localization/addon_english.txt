@@ -5,7 +5,7 @@
 	"Neutrals"        								"Neutral Team"
 	"NoTeam"          								"No Team"
 
-	"DOTA_GoodGuys" "Red Rooster"
+	"DOTA_GoodGuys" "Orange Ostrich"
 	"DOTA_BadGuys"  "Green Goose"
 	"DOTA_Custom1"  "Blue Bear"
 	"DOTA_Custom2"  "Pink Panther"

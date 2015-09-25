@@ -1,4 +1,8 @@
 function shuffleTable(t)
+  if t == nil then
+    print("Couldn't shuffle as its nil")
+  return t
+  end
   local newTable = {}
   for i=1, #t do
     table.insert(newTable, math.random(#newTable), t[i])

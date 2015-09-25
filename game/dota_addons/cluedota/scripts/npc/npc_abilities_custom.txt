@@ -6,25 +6,34 @@
 
 
 
-"stun_game_setup"
+"no_hp"
 {
-  "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+  "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
   "BaseClass"           "ability_datadriven"
   "AbilityTextureName"            "rubick_empty1"
   "MaxLevel"                      "1"
+  "Level" "1"
 
-
+  "OnOwnerSpawned"
+  {
+    "ApplyModifier"
+    {
+      "ModifierName"  "no_hp"
+      "Target"  "CASTER"
+    }
+  }
 
   "Modifiers"
   {
-    "is_stunned"
+    "no_hp"
     {
         "Passive"                        "1"
         "IsHidden"                        "1"
         "Attributes"    "MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE | MODIFIER_ATTRIBUTE_PERMANENT"
         "States"
         {
-          "MODIFIER_STATE_STUNNED"  "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR" "MODIFIER_STATE_VALUE_ENABLED"
+
         }
     }
   }
