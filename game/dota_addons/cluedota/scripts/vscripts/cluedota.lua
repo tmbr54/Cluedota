@@ -73,37 +73,43 @@ end
 --technically works. maybe better once the game has been started to do midgame reinit
 function startNewRound()
   print("Starting a new round..")
+  --inits
+  local NUM_OF_PLAYERS = #table_players
+  table_bubbles = {}
   spawnNewNpcs()
+  current_killer_number = math.random(1,NUM_OF_PLAYERS)
+  print("current_killer_number", current_killer_number)
+
   --shuffle tables
   local table_spawn_new = shuffleTable(table_spawn)
   local table_new_heroes_original_name = shuffleTable(table_all_heroes_original_name)
+
+
 
   -- iterate over all players
   for num,player in pairs(table_players) do
     local playerID = player:GetPlayerID()
     local old_hero = player:GetAssignedHero()
+    print("*************")
+    print("playerID", playerID,"old hero", old_hero:GetUnitName())
+    print("playerID", playerID, "new hero ", table_new_heroes_original_name[playerID+1])
+    print("*************")
+    -- make new hero
+    local hero = nil
+    -- replace their heroes
+    PrecacheUnitByNameAsync(table_new_heroes_original_name[playerID+1], function()
+      PlayerResource:ReplaceHeroWith(playerID,table_new_heroes_original_name[playerID+1], 0, 0)
+      -- remove the zombie hero
+      old_hero:RemoveSelf()
+      --get new hero assignment
+      local hero = player:GetAssignedHero()
 
-    for i=0,NUM_OF_PLAYERS,1 do
-      print("playerID", playerID,"old hero", old_hero:GetUnitName())
-      print("*************")
-      print("playerID", playerID, "new hero ", table_new_heroes_original_name[1])
-      -- make new hero
-      local hero = nil
-      -- replace their heroes
-      PrecacheUnitByNameAsync(table_new_heroes_original_name[playerID+1], function()
-        print(playerID,table_new_heroes_original_name[playerID+1])
+      --set to new position
+      new_position = table_spawn_new[playerID+1]:GetAbsOrigin()
+      hero:SetAbsOrigin(new_position)
+      FindClearSpaceForUnit(hero, new_position, false)
+    end, playerID)
 
-        PlayerResource:ReplaceHeroWith(playerID,table_new_heroes_original_name[playerID+1], 0, 0)
-        -- remove the zombie hero
-        old_hero:RemoveSelf()
-        --get new hero assignment
-        local hero = player:GetAssignedHero()
-        --set to new position
-        new_position = table_spawn_new[playerID+1]:GetAbsOrigin()
-        hero:SetAbsOrigin(new_position)
-        FindClearSpaceForUnit(hero, new_position, false)
-      end, playerID)
-    end
   end
 end
 
@@ -113,6 +119,7 @@ print("*************************************************************************
 -- cleanup
   -- find all current npcs (creates a new table)
   local table_current_npcs = Entities:FindAllByClassname("npc_dota_creature")
+  local to_be_killed = math.random(1,MAX_NUM_OF_NPCS)
   -- remove them
   for num,npc in pairs(table_current_npcs) do
     if npc then
@@ -128,10 +135,14 @@ print("*************************************************************************
   local spawn_positions = shuffleTable(spawn_positions)
   --PrintTable(spawn_positions)
   -- create NPCs
-  for i=1,10,1 do
+  for i=1,MAX_NUM_OF_NPCS,1 do
     local current_spawn_pos = spawn_positions[i]:GetAbsOrigin()
     local npc = CreateUnitByName(new_npcs[i], current_spawn_pos, false, nil, nil, -1)
     print(i, "NPC ",npc:GetUnitName()," has spawned at ",current_spawn_pos,".")
+    if i == to_be_killed then
+      NPC_TO_BE_KILLED = npc:GetUnitName()
+    end
+    print("NPC to be killed:", npc:GetUnitName() )
   end
 print("*************************************************************************")
 
@@ -156,20 +167,20 @@ end
 function cluedota:OnAllPlayersLoaded()
   DebugPrint("[CLUEDOTA] All Players have loaded into the game")
 
-  --insert all connected players into table
+  --insert all possible players into table
   for id = 0, (MAX_NUMBER_OF_TEAMS) do
     table_players[id] = PlayerResource:GetPlayer(id)
 
-    --if player connects
+    --if player is valid
     if table_players[id] then
       local playerID = table_players[id]:GetPlayerID()
+      print("Added player", playerID, "to table_players")
       table_players[id]:MakeRandomHeroSelection()
       --random a hero
       PlayerResource:SetHasRepicked(playerID)
       PlayerResource:SetHasRandomed(playerID)
     else
-
-      --if player hasn't connected
+      --if player doesnt exist
       if PlayerResource:GetConnectionState(id) == 1 then
         table_players[id] = "player_not_connected"
         print("Player "..id.." hasn't connected")
@@ -181,7 +192,10 @@ function cluedota:OnAllPlayersLoaded()
 
   print("All players have connected:")
   --PrintTable(table_players)
-  NUM_OF_PLAYERS = table.getn(table_players)
+  local  NUM_OF_PLAYERS = #table_players
+  current_killer_number = math.random(1,NUM_OF_PLAYERS)
+  print("Current Killer playerID:", current_killer_number)
+
 end
 
 
@@ -200,7 +214,6 @@ function cluedota:OnHeroInGame(hero)
   if hero then
     --print("hero:GetAbsOrigin", hero:GetAbsOrigin())
     hero:SetGold(0, false)
-    print("test3")
 
 
     --add hero to table_current_heroes
@@ -215,6 +228,14 @@ function cluedota:OnHeroInGame(hero)
     hero:SetAbsOrigin(new_position)
     FindClearSpaceForUnit(hero, new_position, true)
 
+    --Is this hero the killer?
+    if playerID == current_killer_number then
+      CURRENT_KILLER = hero:GetUnitName()
+      print("Killer found! CURRENT KILLER : ", CURRENT_KILLER)
+      -- TODO: Add code to signal player that he is the killer
+    end
+    -- TODO: Add code to signal players if they are not the killer
+
     --remove hp_bar
     local no_hp = hero:FindAbilityByName("no_hp")
     if no_hp then
@@ -222,7 +243,12 @@ function cluedota:OnHeroInGame(hero)
     end
     --remove skill points
     hero:SetAbilityPoints(0)
+    local get_hint = hero:FindAbilityByName("get_hint")
+    if get_hint then
+      get_hint:SetLevel(1)
+    end
   end
+
 
 end
 
@@ -233,49 +259,27 @@ end
 ]]
 function cluedota:OnGameInProgress()
   DebugPrint("[CLUEDOTA] The game has officially begun")
-
-
-    Timers:CreateTimer(5, -- Start this timer 30 game-time seconds later
-    function()
-        print("Gamelogic has started")
-        --start gamelogic
-        spawnNewNpcs()
-      end)
+  spawnNewNpcs()
 end
-
-
 
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function cluedota:Initcluedota()
   cluedota = self
 
-
   DebugPrint('[CLUEDOTA] Starting to load cluedota cluedota...')
+  --init global values
+  MAIN_NPC_HAS_BEEN_KILLED = false
+  MAX_NUM_OF_NPCS = 10
 
   --init Tables
+    table_has_seen_killer = {}
+    table_bubbles = {}
     table_players = {}
     table_current_heroes = {}
     table_spawn = {}
     table_already_occupied_spawn = {}
     table_all_heroes = { "npc_dota_hero_alchemist_cluedota",
-    "npc_dota_hero_dragon_knight_cluedota",
-    "npc_dota_hero_juggernaut_cluedota",
-    "npc_dota_hero_night_stalker_cluedota",
-    "npc_dota_hero_pudge_cluedota",
-    "npc_dota_hero_riki_cluedota",
-    "npc_dota_hero_bounty_hunter_cluedota",
-    "npc_dota_hero_lycan_cluedota",
-    "npc_dota_hero_brewmaster_cluedota",
-    "npc_dota_hero_phantom_assassin_cluedota",
-    "npc_dota_hero_rubick_cluedota",
-    "npc_dota_hero_phantom_assassin_cluedota",
-    "npc_dota_hero_templar_assassin_cluedota",
-    "npc_dota_hero_keeper_of_the_light_cluedota",
-    "npc_dota_hero_invoker_cluedota",
-    }
-
-    table_all_heroes_original_nam = { "npc_dota_hero_alchemist_cluedota",
     "npc_dota_hero_dragon_knight_cluedota",
     "npc_dota_hero_juggernaut_cluedota",
     "npc_dota_hero_night_stalker_cluedota",
@@ -310,7 +314,8 @@ function cluedota:Initcluedota()
     }
 
 
-    table_all_npcs = { "npc_cd_earthshaker",
+    table_all_npcs = {"empty",
+       "npc_cd_earthshaker",
     "npc_cd_kunkka",
     "npc_cd_beastmaster",
     "npc_cd_omni",
@@ -360,7 +365,9 @@ function cluedota:ExampleConsoleCommand()
     local playerID = cmdPlayer:GetPlayerID()
     if playerID ~= nil and playerID ~= -1 then
       -- Do something here for the player who called this command
-      startNewRound()
+        SUSPICIOUS_ACTIVITY = true
+        PrintTable(table_bubbles)
+        startNewRound()
     end
   end
 

@@ -4,6 +4,38 @@
 {
   "Version"   "1"
 
+"ask_question"
+{
+
+}
+
+"get_hint"
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "get_hint"
+  "MaxLevel"             "1"
+  "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_BASIC"
+  "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "AbilityCastPoint"       "0.0"
+  "AnimationPlaybackRate"  "1"
+  "AnimationIgnoresModelScale" "1"
+  "AbilityCooldown" "45"
+  "AbilityCastRange"  "400"
+  "AbilityCastRangeBuffer"  "200"
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+
+      "ScriptFile"  "createNewHint.lua"
+      "Function"    "createNewHint"
+    }
+  }
+
+}
 
 
 "no_hp"

@@ -14,7 +14,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Hermit"
 
 
@@ -83,7 +83,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Admiral"
 
     "precache"
@@ -154,13 +154,13 @@
   {
     "BaseClass" "npc_dota_creature"
     "Model" "models/heroes/beastmaster/beastmaster.vmdl"
-    "SoundSet"  "Hero_Kunkaa"
+    "SoundSet"  "Hero_Beastmaster"
     "GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_beastmaster.vsndevts"
     "VoiceFile"					"soundevents/voscripts/game_sounds_vo_beastmaster.vsndevts"
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Barbarian"
 
     "precache"
@@ -233,7 +233,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Paladin"
 
     "precache"
@@ -308,8 +308,8 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
-    "UnitLabel" "Vacca"
+
+    "UnitLabel" "Cow"
 
     "precache"
     {
@@ -384,8 +384,8 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
-    "UnitLabel" "Veteran"
+
+    "UnitLabel" "Drunk"
 
     "precache"
     {
@@ -464,7 +464,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Commander"
 
     "precache"
@@ -542,7 +542,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Monk"
 
     "precache"
@@ -619,7 +619,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Huntress"
 
     "precache"
@@ -697,7 +697,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Hunter"
 
     "precache"
@@ -773,7 +773,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "FuzzyWuzzy"
 
     "precache"
@@ -849,7 +849,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Maiden"
 
     "precache"
@@ -924,7 +924,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Ranger"
 
     "precache"
@@ -997,7 +997,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Sorceress"
 
     "precache"
@@ -1073,7 +1073,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Dryad"
 
     "precache"
@@ -1152,7 +1152,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Shaman"
 
     "precache"
@@ -1232,7 +1232,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Ogre"
 
     "precache"
@@ -1308,7 +1308,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Sky Mage"
 
     "precache"
@@ -1390,7 +1390,7 @@
     "ModelScale"    "1.0"
     "Level" "1"
     "HealthbarOffset"   "140"
-    "ConsideredHero"        "1"
+
     "UnitLabel" "Bum"
 
     "precache"
