@@ -19,3 +19,8 @@ table_npc_cd_anti_mage_negative = {
 "neg2",
 "neg3",
 }
+table_npc_cd_anti_mage_trivia = {
+"trivia1",
+"trivia2",
+"trivia3",
+}

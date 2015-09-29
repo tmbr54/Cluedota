@@ -19,3 +19,9 @@ table_npc_cd_lina_negative = {
 "neg2",
 "neg3",
 }
+
+table_npc_cd_lina_trivia = {
+"trivia1",
+"trivia2",
+"trivia3",
+}

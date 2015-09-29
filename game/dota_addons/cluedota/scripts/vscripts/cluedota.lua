@@ -77,13 +77,13 @@ function startNewRound()
   local NUM_OF_PLAYERS = #table_players
   table_bubbles = {}
   spawnNewNpcs()
-  current_killer_number = math.random(1,NUM_OF_PLAYERS)
-  print("current_killer_number", current_killer_number)
+  CURRENT_KILLER_NUMBER = RandomInt(0,NUM_OF_PLAYERS)
+  print("CURRENT_KILLER_NUMBER", CURRENT_KILLER_NUMBER)
 
   --shuffle tables
   local table_spawn_new = shuffleTable(table_spawn)
   local table_new_heroes_original_name = shuffleTable(table_all_heroes_original_name)
-
+  --PrintTable(table_new_heroes_original_name)
 
 
   -- iterate over all players
@@ -119,7 +119,7 @@ print("*************************************************************************
 -- cleanup
   -- find all current npcs (creates a new table)
   local table_current_npcs = Entities:FindAllByClassname("npc_dota_creature")
-  local to_be_killed = math.random(1,MAX_NUM_OF_NPCS)
+  local to_be_killed = RandomInt(1,MAX_NUM_OF_NPCS)
   -- remove them
   for num,npc in pairs(table_current_npcs) do
     if npc then
@@ -136,13 +136,15 @@ print("*************************************************************************
   --PrintTable(spawn_positions)
   -- create NPCs
   for i=1,MAX_NUM_OF_NPCS,1 do
+
     local current_spawn_pos = spawn_positions[i]:GetAbsOrigin()
     local npc = CreateUnitByName(new_npcs[i], current_spawn_pos, false, nil, nil, -1)
     print(i, "NPC ",npc:GetUnitName()," has spawned at ",current_spawn_pos,".")
     if i == to_be_killed then
       NPC_TO_BE_KILLED = npc:GetUnitName()
+      print("NPC to be killed:", npc:GetUnitName() )
     end
-    print("NPC to be killed:", npc:GetUnitName() )
+
   end
 print("*************************************************************************")
 
@@ -193,8 +195,8 @@ function cluedota:OnAllPlayersLoaded()
   print("All players have connected:")
   --PrintTable(table_players)
   local  NUM_OF_PLAYERS = #table_players
-  current_killer_number = math.random(1,NUM_OF_PLAYERS)
-  print("Current Killer playerID:", current_killer_number)
+  CURRENT_KILLER_NUMBER = RandomInt(0,NUM_OF_PLAYERS)
+  print("Current Killer playerID:", CURRENT_KILLER_NUMBER)
 
 end
 
@@ -207,48 +209,63 @@ end
   levels, changing the starting gold, removing/adding abilities, adding physics, etc.
 
   The hero parameter is the hero entity that just spawned in
-]]
+  ]]
 
 function cluedota:OnHeroInGame(hero)
   DebugPrint("[CLUEDOTA] Hero spawned in game for first time -- " .. hero:GetUnitName())
-  if hero then
-    --print("hero:GetAbsOrigin", hero:GetAbsOrigin())
-    hero:SetGold(0, false)
+
+  --print("hero:GetAbsOrigin", hero:GetAbsOrigin())
+  hero:SetGold(0, false)
 
 
-    --add hero to table_current_heroes
-    local playerID = hero:GetPlayerOwnerID()
-    print("PlayerID of ",hero:GetName()," : ", playerID)
-    table_current_heroes[playerID] = hero
 
-    --set hero to a 'random' position
-    local new_position = table_spawn[playerID+1]:GetAbsOrigin() --lazy fix because table_spawn starts at 1, yet playerID at 0
-    --print("new pos table spawn", new_position)
-    --set to new position
-    hero:SetAbsOrigin(new_position)
-    FindClearSpaceForUnit(hero, new_position, true)
 
-    --Is this hero the killer?
-    if playerID == current_killer_number then
-      CURRENT_KILLER = hero:GetUnitName()
-      print("Killer found! CURRENT KILLER : ", CURRENT_KILLER)
-      -- TODO: Add code to signal player that he is the killer
-    end
-    -- TODO: Add code to signal players if they are not the killer
+  --add hero to table_current_heroes
+  local playerID = hero:GetPlayerOwnerID()
+  print("PlayerID of ",hero:GetName()," : ", playerID)
+  table_current_heroes[playerID] = hero
 
-    --remove hp_bar
-    local no_hp = hero:FindAbilityByName("no_hp")
-    if no_hp then
-      no_hp:SetLevel(1)
-    end
-    --remove skill points
-    hero:SetAbilityPoints(0)
-    local get_hint = hero:FindAbilityByName("get_hint")
-    if get_hint then
-      get_hint:SetLevel(1)
-    end
+  local player = PlayerResource:GetPlayer(playerID)
+
+  --set hero to a 'random' position
+  local new_position = table_spawn[playerID+1]:GetAbsOrigin() --lazy fix because table_spawn starts at 1, yet playerID at 0
+  --print("new pos table spawn", new_position)
+  --set to new position
+  hero:SetAbsOrigin(new_position)
+  FindClearSpaceForUnit(hero, new_position, true)
+
+  --Is this hero the killer?
+  if playerID == CURRENT_KILLER_NUMBER then
+    CURRENT_KILLER = hero:GetUnitName()
+    print("Killer found! CURRENT KILLER : ", CURRENT_KILLER)
+    --give him the melee kill ability
+    hero:RemoveAbility("get_hint")
+    hero:AddAbility("melee_kill")
+    local melee_kill = hero:FindAbilityByName("melee_kill")
+    melee_kill:SetLevel(1)
+    --Tell the player what his role is
+    --panorama stuff
+  else
+
+    -- panorama stuff
   end
 
+  -- force selection
+  PlayerResource:SetOverrideSelectionEntity(playerID, hero)
+
+
+  --remove hp_bar
+  local no_hp = hero:FindAbilityByName("no_hp")
+  if no_hp then
+    no_hp:SetLevel(1)
+  end
+
+  local get_hint = hero:FindAbilityByName("get_hint")
+  if get_hint then
+    get_hint:SetLevel(1)
+  end
+  --remove skill points
+  hero:SetAbilityPoints(0)
 
 end
 
@@ -279,6 +296,29 @@ function cluedota:Initcluedota()
     table_current_heroes = {}
     table_spawn = {}
     table_already_occupied_spawn = {}
+
+
+    table_npc_death_sound = {
+    ["npc_cd_earthshaker"] = "earthshaker_erth_death",
+    ["npc_cd_kunkka"] = "kunkka_kunk_death",
+    ["npc_cd_beastmaster"] = "beastmaster_beas_death",
+    ["npc_cd_omni"] = "omniknight_omni_death",
+    ["npc_cd_spirit_breaker"] = "spirit_breaker_spir_death",
+    ["npc_cd_tusk"] = "tusk_tusk_death",
+    ["npc_cd_legion"] = "legion_commander_legcom_death",
+    ["npc_cd_anti_mage"] = "anti_mage_anti_death",
+    ["npc_cd_mirana"] = "mirana_mir_death",
+    ["npc_cd_sniper"] = "sniper_snip_death",
+    ["npc_cd_ursa"] = "ursa_ursa_death",
+    ["npc_cd_maiden"] = "crystalmaiden_cm_death",
+    ["npc_cd_windrunner"] = "windrunner_wind_death",
+    ["npc_cd_lina"] = "lina_lina_death",
+    ["npc_cd_dazzle"] = "dazzle_dazz_death",
+    ["npc_cd_ogremagi"] = "ogre_magi_ogmag_death",
+    ["npc_cd_skywrath"] = "skywrath_mage_drag_death",
+    ["npc_cd_meepo"] = "meepo_meepo_death",
+  }
+
     table_all_heroes = { "npc_dota_hero_alchemist_cluedota",
     "npc_dota_hero_dragon_knight_cluedota",
     "npc_dota_hero_juggernaut_cluedota",
@@ -288,15 +328,16 @@ function cluedota:Initcluedota()
     "npc_dota_hero_bounty_hunter_cluedota",
     "npc_dota_hero_lycan_cluedota",
     "npc_dota_hero_brewmaster_cluedota",
-    "npc_dota_hero_phantom_assassin_cluedota",
     "npc_dota_hero_rubick_cluedota",
     "npc_dota_hero_phantom_assassin_cluedota",
     "npc_dota_hero_templar_assassin_cluedota",
     "npc_dota_hero_keeper_of_the_light_cluedota",
-    "npc_dota_hero_invoker_cluedota",
+    "npc_dota_hero_warlock_cluedota",
     }
 
+    --ghetto solution to fixing shuffle: first hero is 2x in table
     table_all_heroes_original_name = { "npc_dota_hero_alchemist",
+    "npc_dota_hero_alchemist",
     "npc_dota_hero_dragon_knight",
     "npc_dota_hero_juggernaut",
     "npc_dota_hero_night_stalker",
@@ -307,10 +348,9 @@ function cluedota:Initcluedota()
     "npc_dota_hero_brewmaster",
     "npc_dota_hero_phantom_assassin",
     "npc_dota_hero_rubick",
-    "npc_dota_hero_phantom_assassin",
     "npc_dota_hero_templar_assassin",
     "npc_dota_hero_keeper_of_the_light",
-    "npc_dota_hero_invoker",
+    "npc_dota_hero_warlock",
     }
 
 
@@ -365,8 +405,8 @@ function cluedota:ExampleConsoleCommand()
     local playerID = cmdPlayer:GetPlayerID()
     if playerID ~= nil and playerID ~= -1 then
       -- Do something here for the player who called this command
-        SUSPICIOUS_ACTIVITY = true
-        PrintTable(table_bubbles)
+        --SUSPICIOUS_ACTIVITY = true
+        --PrintTable(table_bubbles)
         startNewRound()
     end
   end

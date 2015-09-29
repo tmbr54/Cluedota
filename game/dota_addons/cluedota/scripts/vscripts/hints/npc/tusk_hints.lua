@@ -19,3 +19,8 @@ table_npc_cd_tusk_negative = {
 "neg2",
 "neg3",
 }
+table_npc_cd_tusk_trivia = {
+"trivia1",
+"trivia2",
+"trivia3",
+}

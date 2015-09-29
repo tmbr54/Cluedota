@@ -13,5 +13,5 @@
 	"DOTA_Custom4"  "White Wolf"
 
 	"addonname"										"Cluedota"
-	"addon_game_name"							"Cluedota"
+	"addon_game_name" "Cluedota"
 }

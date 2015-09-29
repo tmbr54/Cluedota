@@ -4,10 +4,6 @@
 {
   "Version"   "1"
 
-"ask_question"
-{
-
-}
 
 "get_hint"
 {
@@ -18,27 +14,27 @@
   "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_BASIC"
   "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
   "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-  "AbilityCastPoint"       "0.0"
-  "AnimationPlaybackRate"  "1"
-  "AnimationIgnoresModelScale" "1"
+  "AbilityCastPoint"       "0.3"
+  "AnimationPlaybackRate"  "1.1"
+  "AnimationIgnoresModelScale" "0"
   "AbilityCooldown" "45"
   "AbilityCastRange"  "400"
   "AbilityCastRangeBuffer"  "200"
+
 
   "OnSpellStart"
   {
     "RunScript"
     {
 
-      "ScriptFile"  "createNewHint.lua"
+      "ScriptFile"  "abilities/createNewHint.lua"
       "Function"    "createNewHint"
     }
   }
-
 }
 
 
-"no_hp"
+"unselectable"
 {
   "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
   "BaseClass"           "ability_datadriven"
@@ -50,10 +46,34 @@
   {
     "ApplyModifier"
     {
-      "ModifierName"  "no_hp"
+      "ModifierName"  "unselectable"
       "Target"  "CASTER"
     }
   }
+
+  "Modifiers"
+  {
+    "unselectable"
+    {
+        "Passive"                        "1"
+        "IsHidden"                        "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE | MODIFIER_ATTRIBUTE_PERMANENT"
+        "States"
+        {
+          "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
+        }
+    }
+  }
+}
+
+
+"no_hp"
+{
+  "AbilityBehavior"     "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+  "BaseClass"           "ability_datadriven"
+  "AbilityTextureName"            "rubick_empty1"
+  "MaxLevel"                      "1"
+  "Level" "1"
 
   "Modifiers"
   {
@@ -65,12 +85,48 @@
         "States"
         {
           "MODIFIER_STATE_NO_HEALTH_BAR" "MODIFIER_STATE_VALUE_ENABLED"
-
         }
     }
   }
 }
 
+"melee_kill"
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "dagger"
+  "MaxLevel"             "1"
+  "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_BASIC"
+  "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "AbilityCastPoint"       "0.3"
+  "AnimationPlaybackRate"  "1.1"
+  "AnimationIgnoresModelScale" "0"
+  "AbilityCooldown" "60"
+  "AbilityCastRange"  "100"
+  "AbilityCastRangeBuffer"  "200"
+  "AbilityCastAnimation"   "ACT_DOTA_ATTACK"
+
+  "precache"
+  {
+    "particle"  "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_dagger.vpcf"
+    "particle"  "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+    "particle"  "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_bloodstain.vpcf"
+
+  }
+
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+
+      "ScriptFile"  "abilities/melee_kill.lua"
+      "Function"    "melee_kill"
+    }
+  }
+
+}
 
 
 //-------------------

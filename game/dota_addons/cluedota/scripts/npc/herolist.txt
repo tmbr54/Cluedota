@@ -18,6 +18,6 @@
   "npc_dota_hero_rubick" "1"
   "npc_dota_hero_templar_assassin" "1"
   "npc_dota_hero_keeper_of_the_light" "1"
-  "npc_dota_hero_invoker" "1"
+  "npc_dota_hero_warlock" "1"
 
 }

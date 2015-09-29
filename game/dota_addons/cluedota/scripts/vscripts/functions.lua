@@ -1,14 +1,26 @@
+-- doesnt shuffle the first element in t, always puts it at the end
 function shuffleTable(t)
-  if t == nil then
-    print("Couldn't shuffle as its nil")
-    return t
-  end
   local newTable = {}
   for i=1, #t do
-    table.insert(newTable, math.random(#newTable), t[i])
+    table.insert(newTable, RandomInt(1,#newTable), t[i])
   end
   return newTable
 end
+
+
+-- figure out why it removes stuff from the original table
+-- function shuffleTable2(t)
+--   local oldTable = t
+--   local newTable = {}
+--   local oldLen = #t
+--   for i=1, oldLen do
+--     local element = RandomInt(1, oldLen)
+--     print("element", oldTable[element])
+--     table.insert(newTable, oldTable[element])
+--     table.remove(oldTable, element)
+--   end
+--   return newTable
+-- end
 
 function table.contains(table, element)
   for _, value in pairs(table) do
@@ -18,6 +30,39 @@ function table.contains(table, element)
   end
   return false
 end
+
+
+function rotateTargetToCaster(target, caster)
+  --super lazy way, thanks to mayheim
+
+  --root target
+  target:AddNewModifier(target, nil, "modifier_rooted", nil)
+
+  local movementOrder = {
+    UnitIndex = target:entindex(),
+    Ordertype = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+    position = caster:GetAbsOrigin()
+  }
+
+  local stopOrder = {
+    UnitIndex = target:entindex(),
+    OrderType = DOTA_UNIT_ORDER_STOP,
+  }
+
+  --send movement command to target
+  ExecuteOrderFromTable(movementOrder)
+
+
+  --once the target is looking at the caster, unroot it and stop it
+  Timers:CreateTimer(1, function()
+    target:RemoveModifierByName("modifier_rooted")
+    ExecuteOrderFromTable(stopOrder)
+    return nil
+  end)
+
+end
+
+
 
 
 
