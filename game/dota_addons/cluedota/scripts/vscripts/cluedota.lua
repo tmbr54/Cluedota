@@ -144,14 +144,41 @@ print("*************************************************************************
       NPC_TO_BE_KILLED = npc:GetUnitName()
       print("NPC to be killed:", npc:GetUnitName() )
     end
-
+    WalkToRandomPos(npc)
   end
 print("*************************************************************************")
 
 end
 
 
+function WalkToRandomPos(unit)
 
+
+  local all_positions = Entities:FindAllByName("random_walk_point")
+
+  Timers:CreateTimer(1, function()
+
+    if unit:IsNull() then
+      return nil
+    end
+    local position = all_positions[RandomInt(1, #all_positions)]:GetAbsOrigin()
+
+    local randomMoveOrder = {
+      UnitIndex = unit:entindex(),
+      OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+      Position = position
+    }
+
+    ExecuteOrderFromTable(randomMoveOrder)
+
+
+
+    return 10
+
+  end)
+
+
+end
 
 
 --[[
