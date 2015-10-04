@@ -309,7 +309,7 @@
     "Level" "1"
     "HealthbarOffset"   "140"
 
-    "UnitLabel" "Cow"
+    "UnitLabel" "Bull"
 
     "precache"
     {
@@ -385,7 +385,7 @@
     "Level" "1"
     "HealthbarOffset"   "140"
 
-    "UnitLabel" "Drunk"
+    "UnitLabel" "Drunkard"
 
     "precache"
     {
@@ -774,7 +774,7 @@
     "Level" "1"
     "HealthbarOffset"   "140"
 
-    "UnitLabel" "FuzzyWuzzy"
+    "UnitLabel" "Bear"
 
     "precache"
     {

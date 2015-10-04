@@ -3,6 +3,7 @@
 require('internal/util')
 require('cluedota')
 require('functions')
+require('libraries/animations')
 
 
 
@@ -76,6 +77,9 @@ function Precache( context )
   PrecacheUnitByNameSync("npc_cd_skywrath", context)
   PrecacheUnitByNameSync("npc_cd_ogremagi", context)
   PrecacheUnitByNameSync("npc_cd_meepo", context)
+
+
+  PrecacheResource(particle, "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_dagger.vpcf", context)
 
 
   -- Particles can be precached individually or by folder

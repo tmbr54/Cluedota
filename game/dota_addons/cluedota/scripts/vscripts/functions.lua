@@ -32,6 +32,41 @@ function table.contains(table, element)
 end
 
 
+
+function WalkToRandomPos(unit, npcNumber)
+  local unitName = unit:GetUnitName()
+
+  Timers:CreateTimer(RandomFloat(1, 4) , function()
+    if unit:IsNull() then
+      return nil
+    end
+
+    --grab a random position out of all possible ones
+    local random_position = table_positions[RandomInt(1, #table_positions)]:GetAbsOrigin()
+
+    -- If someone is at that position, don't move
+    if table.contains(table_already_occupied_position, random_position) then
+      unit:Hold()
+      print("unit",unitName," is holding position")
+    else
+
+      --keep track of position
+      table_already_occupied_position[npcNumber] = random_position
+
+      --move unit
+      local moveOrder = {
+        UnitIndex = unit:entindex(),
+        OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
+        Position = random_position
+      }
+      ExecuteOrderFromTable(moveOrder)
+      print("unit",unitName," is changing position")
+    end
+    return 14
+  end)
+end
+
+
 function rotateTargetToCaster(target, caster)
   --super lazy way, thanks to mayheim
 
@@ -59,6 +94,8 @@ function rotateTargetToCaster(target, caster)
     ExecuteOrderFromTable(stopOrder)
     return nil
   end)
+  --then give it a new random movement order
+  WalkToRandomPos(target)
 
 end
 

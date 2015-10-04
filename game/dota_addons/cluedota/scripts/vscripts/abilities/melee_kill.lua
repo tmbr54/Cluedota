@@ -3,6 +3,9 @@ function melee_kill(event)
   local target = event.target
   local caster = event.caster
 
+  local table_toBeKilled = table_npc_values[NPC_TO_BE_KILLED]
+
+
   if target:GetUnitName() == NPC_TO_BE_KILLED then
 
 
@@ -19,17 +22,20 @@ function melee_kill(event)
 
 
     -- sound
-    local death_sound_num = RandomInt(1,10)
-    EmitGlobalSound(table_npc_death_sound[NPC_TO_BE_KILLED].."_0"..death_sound_num)
+    local death_sound_num = RandomInt(1,9)
+
+    EmitGlobalSound(table_toBeKilled[1].."_0"..death_sound_num)
     EmitGlobalSound("ui.npe_badge")
 
     --logic
     MAIN_NPC_HAS_BEEN_KILLED = true
-    target:ForceKill(false)
+
+    --figure out a way to keep corpse around
+    target:ForceKill(true)
 
 
   else
     --fix NPC name
-    GameRules:SendCustomMessageToTeam("<font color='#ff3e3e'>Don't go around killing innocent people!</font><br> Your target is:<font color='#ff3e3e'> "..NPC_TO_BE_KILLED.."</font>", caster:GetTeamNumber(), 0,0)
+    GameRules:SendCustomMessageToTeam("<font color='#ff3e3e'>Don't go around killing innocent people!</font><br> Your target is:<font color='#3379fa'> "..table_toBeKilled[3].."</font>", caster:GetTeamNumber(), 0,0)
   end
 end

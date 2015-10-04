@@ -144,41 +144,12 @@ print("*************************************************************************
       NPC_TO_BE_KILLED = npc:GetUnitName()
       print("NPC to be killed:", npc:GetUnitName() )
     end
-    WalkToRandomPos(npc)
+    WalkToRandomPos(npc, i)
   end
 print("*************************************************************************")
 
 end
 
-
-function WalkToRandomPos(unit)
-
-
-  local all_positions = Entities:FindAllByName("random_walk_point")
-
-  Timers:CreateTimer(1, function()
-
-    if unit:IsNull() then
-      return nil
-    end
-    local position = all_positions[RandomInt(1, #all_positions)]:GetAbsOrigin()
-
-    local randomMoveOrder = {
-      UnitIndex = unit:entindex(),
-      OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
-      Position = position
-    }
-
-    ExecuteOrderFromTable(randomMoveOrder)
-
-
-
-    return 10
-
-  end)
-
-
-end
 
 
 --[[
@@ -321,48 +292,38 @@ function cluedota:Initcluedota()
     table_bubbles = {}
     table_players = {}
     table_current_heroes = {}
-    table_spawn = {}
-    table_already_occupied_spawn = {}
+    --table_spawn = {}
+
+    --table_positions = {}
+    table_already_occupied_position = {}
 
 
-    table_npc_death_sound = {
-    ["npc_cd_earthshaker"] = "earthshaker_erth_death",
-    ["npc_cd_kunkka"] = "kunkka_kunk_death",
-    ["npc_cd_beastmaster"] = "beastmaster_beas_death",
-    ["npc_cd_omni"] = "omniknight_omni_death",
-    ["npc_cd_spirit_breaker"] = "spirit_breaker_spir_death",
-    ["npc_cd_tusk"] = "tusk_tusk_death",
-    ["npc_cd_legion"] = "legion_commander_legcom_death",
-    ["npc_cd_anti_mage"] = "anti_mage_anti_death",
-    ["npc_cd_mirana"] = "mirana_mir_death",
-    ["npc_cd_sniper"] = "sniper_snip_death",
-    ["npc_cd_ursa"] = "ursa_ursa_death",
-    ["npc_cd_maiden"] = "crystalmaiden_cm_death",
-    ["npc_cd_windrunner"] = "windrunner_wind_death",
-    ["npc_cd_lina"] = "lina_lina_death",
-    ["npc_cd_dazzle"] = "dazzle_dazz_death",
-    ["npc_cd_ogremagi"] = "ogre_magi_ogmag_death",
-    ["npc_cd_skywrath"] = "skywrath_mage_drag_death",
-    ["npc_cd_meepo"] = "meepo_meepo_death",
+
+    table_npc_values = {
+    ["npc_cd_earthshaker"] = {"earthshaker_erth_death", 0, "Hermit" },
+    ["npc_cd_kunkka"] = {"kunkka_kunk_death", 0, "Admiral" },
+    ["npc_cd_beastmaster"] = {"beastmaster_beas_death", 0, "Barbarian"  },
+    ["npc_cd_omni"] = {"omniknight_omni_death", 0, "Paladin" },
+    ["npc_cd_spirit_breaker"] = {"spirit_breaker_spir_death", 0, "Bull" },
+    ["npc_cd_tusk"] = {"tusk_tusk_death", 0, "Drunkard" },
+    ["npc_cd_legion"] = {"legion_commander_legcom_death", 0, "Commander" },
+    ["npc_cd_anti_mage"] = {"anti_mage_anti_death", 0, "Monk" },
+    ["npc_cd_mirana"] = {"mirana_mir_death", 0, "Huntress" },
+    ["npc_cd_sniper"] = {"sniper_snip_death", 0, "Hunter" },
+    ["npc_cd_ursa"] = {"ursa_ursa_death", 0, "Bear" },
+    ["npc_cd_maiden"] = {"crystalmaiden_cm_death", 0, "Maiden" },
+    ["npc_cd_windrunner"] = {"windrunner_wind_death", 0, "Ranger" },
+    ["npc_cd_lina"] = {"lina_lina_death", 0, "Sorceress" },
+    ["npc_cd_dazzle"] = {"dazzle_dazz_death", 0, "Shaman" },
+    ["npc_cd_ogremagi"] = {"ogre_magi_ogmag_death", 0, "Ogre" },
+    ["npc_cd_skywrath"] = {"skywrath_mage_drag_death", 0, "Sky Mage" },
+    ["npc_cd_meepo"] = {"meepo_meepo_death", 0, "Bum" },
+    ["npc_cd_enchantress"] = {"enchantress_ench_death_01", 0, "Dryad" },
   }
 
-    table_all_heroes = { "npc_dota_hero_alchemist_cluedota",
-    "npc_dota_hero_dragon_knight_cluedota",
-    "npc_dota_hero_juggernaut_cluedota",
-    "npc_dota_hero_night_stalker_cluedota",
-    "npc_dota_hero_pudge_cluedota",
-    "npc_dota_hero_riki_cluedota",
-    "npc_dota_hero_bounty_hunter_cluedota",
-    "npc_dota_hero_lycan_cluedota",
-    "npc_dota_hero_brewmaster_cluedota",
-    "npc_dota_hero_rubick_cluedota",
-    "npc_dota_hero_phantom_assassin_cluedota",
-    "npc_dota_hero_templar_assassin_cluedota",
-    "npc_dota_hero_keeper_of_the_light_cluedota",
-    "npc_dota_hero_warlock_cluedota",
-    }
 
-    --ghetto solution to fixing shuffle: first hero is 2x in table
+
+    --ghetto solution to fixing shuffle: first hero is 2x in table. dont do this.
     table_all_heroes_original_name = { "npc_dota_hero_alchemist",
     "npc_dota_hero_alchemist",
     "npc_dota_hero_dragon_knight",
@@ -402,11 +363,13 @@ function cluedota:Initcluedota()
     "npc_cd_meepo",
     }
 
-    --create spawn positions
+    --find spawn positions
     table_spawn = Entities:FindAllByName("ent_spawn")
     table_spawn = shuffleTable(table_spawn)
-    --print("table_spawn")
-    --PrintTable(table_spawn)
+    --find random movement positions
+    table_positions = Entities:FindAllByName("random_walk_point")
+    --table_already_occupied_spawn = table_positions
+
 
   -- Call the internal function to set up the rules/behaviors specified in constants.lua
   -- This also sets up event hooks for all event handlers in events.lua
