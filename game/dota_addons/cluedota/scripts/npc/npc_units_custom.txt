@@ -47,8 +47,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -122,8 +122,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -198,8 +198,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -271,8 +271,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -346,8 +346,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -422,8 +422,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -502,8 +502,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -580,8 +580,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -657,8 +657,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -734,8 +734,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -810,8 +810,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -886,8 +886,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -961,8 +961,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1034,8 +1034,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1110,8 +1110,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1189,8 +1189,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1269,8 +1269,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1345,8 +1345,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"
@@ -1427,8 +1427,8 @@
     "BoundsHullName"      "DOTA_HULL_SIZE_HERO"
     "RingRadius"        "70"
 
-    "VisionDaytimeRange"            "1000"
-    "VisionNighttimeRange"          "1000"
+    "VisionDaytimeRange"            "1300"
+    "VisionNighttimeRange"          "1300"
 
     "TeamName"                                      "DOTA_TEAM_NEUTRALS"
     "CombatClassAttack"                     "DOTA_COMBAT_CLASS_ATTACK_BASIC"

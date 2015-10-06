@@ -59,8 +59,14 @@ function WalkToRandomPos(unit, npcNumber)
         OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION,
         Position = random_position
       }
-      ExecuteOrderFromTable(moveOrder)
-      print("unit",unitName," is changing position")
+
+      if unit:IsIdle() then
+        ExecuteOrderFromTable(moveOrder)
+        print("unit",unitName," is changing position")
+      elseif unit:IsIdle() == false then
+        print("Unit", unitName," is currently moving")
+      end
+
     end
     return 14
   end)
