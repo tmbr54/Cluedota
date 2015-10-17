@@ -4,6 +4,7 @@ require('internal/util')
 require('cluedota')
 require('functions')
 require('libraries/animations')
+require('voting')
 
 
 

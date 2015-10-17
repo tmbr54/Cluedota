@@ -22,16 +22,73 @@
   "AbilityCastRangeBuffer"  "200"
 
 
+
   "OnSpellStart"
   {
     "RunScript"
     {
 
-      "ScriptFile"  "abilities/createNewHint.lua"
+      "ScriptFile"  "abilities/create_new_hint.lua"
       "Function"    "createNewHint"
     }
   }
 }
+
+
+"voting"
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "vote"
+  "MaxLevel"             "1"
+  "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_HERO"
+  "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "AbilityCastPoint"       "0.3"
+  "AnimationPlaybackRate"  "1.1"
+  "AnimationIgnoresModelScale" "0"
+  "AbilityCooldown" "60"
+  "AbilityCastRange"  "2000"
+  "AbilityCastRangeBuffer"  "200"
+  "CastFilterRejectCaster" "1"
+  "AbilityCastAnimation"   "ACT_DOTA_ATTACK"
+
+
+  "OnSpellStart"
+  {
+    "RunScript"
+    {
+
+      "ScriptFile"  "abilities/add_vote_point.lua"
+      "Function"    "addVotePoint"
+    }
+  }
+}
+
+
+
+"fake_vote"
+{
+  "BaseClass"                 "ability_datadriven"
+  "AbilityTextureName"      "vote"
+  "MaxLevel"             "1"
+  "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
+  "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_HERO"
+  "AbilityType"            "DOTA_ABILITY_TYPE_BASIC"
+  "AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+  "AbilityCastPoint"       "0.3"
+  "AnimationPlaybackRate"  "1.1"
+  "AnimationIgnoresModelScale" "0"
+  "AbilityCooldown" "60"
+  "AbilityCastRange"  "2000"
+  "AbilityCastRangeBuffer"  "200"
+  "CastFilterRejectCaster" "1"
+  "AbilityCastAnimation"   "ACT_DOTA_ATTACK"
+
+
+}
+
+
 
 
 "unselectable"

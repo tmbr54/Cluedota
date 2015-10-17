@@ -27,7 +27,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -102,7 +102,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -178,7 +178,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -251,7 +251,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -326,7 +326,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -402,7 +402,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -482,7 +482,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -560,7 +560,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -637,7 +637,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -714,7 +714,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -790,7 +790,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -866,7 +866,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -941,7 +941,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1014,7 +1014,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1090,7 +1090,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1169,7 +1169,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1249,7 +1249,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1325,7 +1325,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"
@@ -1407,7 +1407,7 @@
     "Ability6"  ""
 
     "MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"				"300"
+    "MovementSpeed"				"280"
     "MovementTurnRate"			"1.0"
 
     "AttackCapabilities"  "DOTA_UNIT_CAP_NO_ATTACK"

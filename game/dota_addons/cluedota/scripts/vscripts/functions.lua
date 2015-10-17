@@ -36,7 +36,7 @@ end
 function WalkToRandomPos(unit, npcNumber)
   local unitName = unit:GetUnitName()
 
-  Timers:CreateTimer(RandomFloat(1, 4) , function()
+  Timers:CreateTimer(RandomFloat(1, 3) , function()
     if unit:IsNull() then
       return nil
     end
@@ -47,7 +47,7 @@ function WalkToRandomPos(unit, npcNumber)
     -- If someone is at that position, don't move
     if table.contains(table_already_occupied_position, random_position) then
       unit:Hold()
-      print("unit",unitName," is holding position")
+      --print("unit",unitName," is holding position")
     else
 
       --keep track of position
@@ -62,13 +62,13 @@ function WalkToRandomPos(unit, npcNumber)
 
       if unit:IsIdle() then
         ExecuteOrderFromTable(moveOrder)
-        print("unit",unitName," is changing position")
+        --print("unit",unitName," is changing position")
       elseif unit:IsIdle() == false then
-        print("Unit", unitName," is currently moving")
+        --print("Unit", unitName," is currently moving")
       end
 
     end
-    return 14
+    return RandomFloat(15,20)
   end)
 end
 
@@ -145,4 +145,34 @@ function createHintBubble(unit, hint)
       end)
     end
   end)
+end
+
+
+function CountdownTimer()
+    nCOUNTDOWNTIMER = nCOUNTDOWNTIMER - 1
+    local t = nCOUNTDOWNTIMER
+    --print("t", t )
+    local minutes = math.floor(t / 60)
+    local seconds = t - (minutes * 60)
+    local m10 = math.floor(minutes / 10)
+    local m01 = minutes - (m10 * 10)
+    local s10 = math.floor(seconds / 10)
+    local s01 = seconds - (s10 * 10)
+    local broadcast_gametimer =
+        {
+            timer_minute_10 = m10,
+            timer_minute_01 = m01,
+            timer_second_10 = s10,
+            timer_second_01 = s01,
+        }
+    CustomGameEventManager:Send_ServerToAllClients( "countdown", broadcast_gametimer )
+    if t <= 60 then
+        CustomGameEventManager:Send_ServerToAllClients( "timer_alert", broadcast_gametimer )
+    end
+end
+
+
+function SetTimer( time )
+    print( "Set the timer to: " .. time )
+    nCOUNTDOWNTIMER = time
 end

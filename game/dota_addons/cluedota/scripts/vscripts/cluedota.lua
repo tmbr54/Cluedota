@@ -65,20 +65,58 @@ function cluedota:PostLoadPrecache()
   --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
 end
 
+--logic for a game round
+function roundLogic()
+  print("initialized round logic")
+  --timer inits
+  CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
+  Timers:CreateTimer(0, function()
+    CountdownTimer()
+
+    print("Current time left:", nCOUNTDOWNTIMER)
+
+    -- round starts
+    -- timer runs out
+    if nCOUNTDOWNTIMER <= 0 then
+      print("Round over")
+      if GAME_ROUND_OVER == false then
+        if MAIN_NPC_HAS_BEEN_KILLED == false then
+          KILLER_LOST = true
+          GAME_ROUND_OVER = true
+          -- display a message stating killer has lost
+          print("killer failed to assassinate his target in 5 minutes, he loses")
+          -- handle points for killer and everyone else (killer 0 points, everyone 1 point)
+          -- start new round
+          startNewRound()
+        elseif MAIN_NPC_HAS_BEEN_KILLED == true then
+          print("main npc has been killed")
+          print("going to voting screen now ..")
+          GAME_ROUND_OVER = true
+          start_voting()
+        end
+
+        return nil
+      end
+    end
+    return 1
+  end)
+end
 
 --Starts a new round.
---Resets the board, finds new spawn_positions, stuns all heroes and moves them to new positions, then
--- restarts the game logic.
-
---technically works. maybe better once the game has been started to do midgame reinit
 function startNewRound()
+  nCOUNTDOWNTIMER = ROUND_TIME
+  roundLogic()
+  GAME_ROUND_OVER = false
   print("Starting a new round..")
+
   --inits
   local NUM_OF_PLAYERS = #table_players
   table_bubbles = {}
   spawnNewNpcs()
   CURRENT_KILLER_NUMBER = RandomInt(0,NUM_OF_PLAYERS)
   print("CURRENT_KILLER_NUMBER", CURRENT_KILLER_NUMBER)
+  MAIN_NPC_HAS_BEEN_KILLED = false
+
 
   --shuffle tables
   local table_spawn_new = shuffleTable(table_spawn)
@@ -119,33 +157,37 @@ print("*************************************************************************
 -- cleanup
   -- find all current npcs (creates a new table)
   local table_current_npcs = Entities:FindAllByClassname("npc_dota_creature")
-  local to_be_killed = RandomInt(1,MAX_NUM_OF_NPCS)
   -- remove them
   for num,npc in pairs(table_current_npcs) do
     if npc then
       npc:RemoveSelf()
     end
   end
---( szUnitName, vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber )
--- spawn new npcs
+
+  -- spawn new npcs
   -- pull random npcs from table_all_npcs
   local new_npcs = shuffleTable(table_all_npcs)
   -- find NPC locations
   local spawn_positions = Entities:FindAllByName("ent_spawn_npc")
   local spawn_positions = shuffleTable(spawn_positions)
   --PrintTable(spawn_positions)
+  -- generate killers target
+  local to_be_killed = RandomInt(1,MAX_NUM_OF_NPCS)
   -- create NPCs
-  for i=1,MAX_NUM_OF_NPCS,1 do
 
+
+  for i=1,MAX_NUM_OF_NPCS,1 do
     local current_spawn_pos = spawn_positions[i]:GetAbsOrigin()
     local npc = CreateUnitByName(new_npcs[i], current_spawn_pos, false, nil, nil, -1)
     print(i, "NPC ",npc:GetUnitName()," has spawned at ",current_spawn_pos,".")
     if i == to_be_killed then
       NPC_TO_BE_KILLED = npc:GetUnitName()
-      print("NPC to be killed:", npc:GetUnitName() )
     end
     WalkToRandomPos(npc, i)
+
   end
+  print("NPC to be killed:", NPC_TO_BE_KILLED )
+
 print("*************************************************************************")
 
 end
@@ -191,8 +233,11 @@ function cluedota:OnAllPlayersLoaded()
 
 
   print("All players have connected:")
-  --PrintTable(table_players)
-  local  NUM_OF_PLAYERS = #table_players
+  -- PrintTable(table_players)
+  print("Number of Players:", #table_players)
+  local NUM_OF_PLAYERS = #table_players
+
+  -- get killer
   CURRENT_KILLER_NUMBER = RandomInt(0,NUM_OF_PLAYERS)
   print("Current Killer playerID:", CURRENT_KILLER_NUMBER)
 
@@ -249,7 +294,7 @@ function cluedota:OnHeroInGame(hero)
   end
 
   -- force selection
-  PlayerResource:SetOverrideSelectionEntity(playerID, hero)
+  --PlayerResource:SetOverrideSelectionEntity(playerID, hero) TODO UNCOMMENT THIS
 
 
   --remove hp_bar
@@ -275,6 +320,10 @@ end
 function cluedota:OnGameInProgress()
   DebugPrint("[CLUEDOTA] The game has officially begun")
   spawnNewNpcs()
+  roundLogic()
+
+
+
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -282,23 +331,33 @@ end
 function cluedota:Initcluedota()
   cluedota = self
 
-  DebugPrint('[CLUEDOTA] Starting to load cluedota cluedota...')
+
+  DebugPrint('[CLUEDOTA] Starting to load cluedota...')
   --init global values
   MAIN_NPC_HAS_BEEN_KILLED = false
   MAX_NUM_OF_NPCS = 10
+  ROUND_TIME = 60
+  nCOUNTDOWNTIMER = ROUND_TIME
+  GAME_ROUND_OVER = false
+
 
   --init Tables
     table_has_seen_killer = {}
     table_bubbles = {}
     table_players = {}
     table_current_heroes = {}
-    --table_spawn = {}
 
-    --table_positions = {}
     table_already_occupied_position = {}
 
+    table_player_points = {
+      [0] = 0,
+      [1] = 0,
+      [2] = 0,
+      [3] = 0,
+      [4] = 0,
+      [5] = 0,
 
-
+  }
     table_npc_values = {
     ["npc_cd_earthshaker"] = {"earthshaker_erth_death", 0, "Hermit" },
     ["npc_cd_kunkka"] = {"kunkka_kunk_death", 0, "Admiral" },
@@ -324,7 +383,8 @@ function cluedota:Initcluedota()
 
 
     --ghetto solution to fixing shuffle: first hero is 2x in table. dont do this.
-    table_all_heroes_original_name = { "npc_dota_hero_alchemist",
+    table_all_heroes_original_name = {
+    "npc_dota_hero_alchemist",
     "npc_dota_hero_alchemist",
     "npc_dota_hero_dragon_knight",
     "npc_dota_hero_juggernaut",
@@ -339,6 +399,24 @@ function cluedota:Initcluedota()
     "npc_dota_hero_templar_assassin",
     "npc_dota_hero_keeper_of_the_light",
     "npc_dota_hero_warlock",
+    }
+
+    table_hero_names = {
+    ["npc_dota_hero_alchemist"] = "Alchemist",
+    ["npc_dota_hero_alchemist"] = "Alchemist",
+    ["npc_dota_hero_dragon_knight"] = "Dragon Knight",
+    ["npc_dota_hero_juggernaut"] = "Juggernaut",
+    ["npc_dota_hero_night_stalker"] = "Night Stalker",
+    ["npc_dota_hero_pudge"] = "Pudge",
+    ["npc_dota_hero_riki"] = "Riki",
+    ["npc_dota_hero_bounty_hunter"] = "Bounty Hunter",
+    ["npc_dota_hero_lycan"] = "Lycanthrope",
+    ["npc_dota_hero_brewmaster"] = "Brewmaster",
+    ["npc_dota_hero_phantom_assassin"] = "Phantom Assassin",
+    ["npc_dota_hero_rubick"] = "Rubick",
+    ["npc_dota_hero_templar_assassin"] = "Templar Assassin",
+    ["npc_dota_hero_keeper_of_the_light"] = "Keeper of the Light",
+    ["npc_dota_hero_warlock"] = "Warlock",
     }
 
 
@@ -378,7 +456,7 @@ function cluedota:Initcluedota()
 
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
   Convars:RegisterCommand( "debug_command", Dynamic_Wrap(cluedota, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
-
+  Convars:RegisterCommand( "debug_timer", function(...) return SetTimer( ... ) end, "Set the timer.", FCVAR_CHEAT )
   ListenToGameEvent("player_connect_full", Dynamic_Wrap(cluedota, "OnPlayerLoaded"), self)
 
   DebugPrint('[CLUEDOTA] Done loading cluedota cluedota!\n\n')
@@ -397,7 +475,15 @@ function cluedota:ExampleConsoleCommand()
       -- Do something here for the player who called this command
         --SUSPICIOUS_ACTIVITY = true
         --PrintTable(table_bubbles)
-        startNewRound()
+        --startNewRound()
+        --print(CURRENT_KILLER)
+        SetTimer(10)
+        CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
+
+
+
+
+
     end
   end
 

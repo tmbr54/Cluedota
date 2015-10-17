@@ -1,0 +1,48 @@
+
+
+.TimerContainer
+{
+
+	margin-top: 60px;
+	margin-left: 888px;
+}
+
+.TimerPanel
+{
+	flow-children: down;
+	width: 120px;
+	height: 40px;
+
+	background-image: url("file://{images}/custom_game/timer_bg.psd");
+	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	background-size: 100% 100%;
+
+}
+
+#Timer
+{
+	margin-top: 8px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: white;
+	text-shadow: 2px 2px 2px #7b612b;
+    text-align: center;
+	width: 100%;
+    text-overflow: clip;
+}
+
+#Timer.timer_visible
+{
+    opacity: 1;
+}
+
+#Timer.timer_hidden
+{
+    opacity: 0;
+}
+
+#Timer.timer_alert
+{
+    color: red;
+}

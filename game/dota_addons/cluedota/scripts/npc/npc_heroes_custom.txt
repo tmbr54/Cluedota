@@ -485,6 +485,8 @@
     "Ability2"        "cluedota_empty6"
 
     "Ability0"        ""
+    "Ability7"        ""
+    "Ability8"        ""
     "Ability9"        ""
     "Ability10"       ""
     "Ability11"       ""
